@@ -1,0 +1,23 @@
+# Ignore data directory
+/data/
+
+# Common data file formats
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.dat
+*.db
+*.sqlite
+*.h5
+*.hdf5
+*.feather
+*.parquet
+*.pkl
+*.pickle
+
+# Compressed files
+*.zip
+*.gz
+*.tar
+*.rar
