@@ -13,4 +13,3 @@ dependencies:
   - seaborn
   - tqdm
   - xgboost
-prefix: /Users/zanekoch/miniforge3/envs/mutationsAndMethylationAging
