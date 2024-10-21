@@ -2,5 +2,4 @@
 curl -L -o data.zip "https://figshare.com/ndownloader/files/49904031"
 # unzip
 unzip data.zip
-# move data to the MutationsAndMethylationAging directory, such that MutationsAndMethylationAging/data exists
-mv data ..
+# move data to the MutationsAndMethylationAging directory, such that MutationsAndMethylationAging/data exists if it does not already 
