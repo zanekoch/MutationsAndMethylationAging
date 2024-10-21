@@ -1,0 +1,16 @@
+name: mutationsAndMethylationAging
+channels:
+  - conda-forge
+dependencies:
+  - dask
+  - matplotlib
+  - numpy
+  - pandas
+  - pyarrow
+  - rich
+  - scikit-learn
+  - scipy
+  - seaborn
+  - tqdm
+  - xgboost
+prefix: /Users/zanekoch/miniforge3/envs/mutationsAndMethylationAging
