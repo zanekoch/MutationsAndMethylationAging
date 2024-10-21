@@ -1,4 +1,4 @@
-name: mutationsAndMethylationAging
+name: mutationsAndMethylationAging2
 channels:
   - conda-forge
 dependencies:
@@ -13,3 +13,4 @@ dependencies:
   - seaborn
   - tqdm
   - xgboost
+  - ipykernel
