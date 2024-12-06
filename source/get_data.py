@@ -6,7 +6,9 @@ plt.style.use("seaborn-deep")
 import os 
 import glob
 import dask.dataframe as dd
-
+# set working directory to the directory of this file
+THIS_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+os.chdir(THIS_SCRIPT_DIR)
 # CONSTANTS
 VALID_MUTATIONS = ["C>A", "C>G", "C>T", "T>A", "T>C", "T>G", "G>C","G>A", "A>T", "A>G" , "A>C", "G>T", "C>-"]
 
@@ -132,10 +134,10 @@ def get_illum_locs(illum_cpg_locs_fn):
 def read_icgc_data() -> tuple:
     print("reading in data")
     # get icgc data
-    icgc_data_dir = "../data/icgc"
-    dependency_f_dir = "../dependency_files"
+    icgc_data_dir = os.path.join(THIS_SCRIPT_DIR, "../data/icgc")
+    dependency_f_dir = os.path.join(THIS_SCRIPT_DIR, "../dependency_files")
     illumina_cpg_locs_df, icgc_mut_df, icgc_methyl_df, icgc_methyl_df_t, icgc_meta_df, icgc_dataset_names_list = main(
-        illum_cpg_locs_fn = os.path.join(dependency_f_dir, "illumina_cpg_450k_locations.csv"),
+        illum_cpg_locs_fn = os.path.join(dependency_f_dir, "illumina_cpg_450k_locations.csv.gz"),
         out_dir = '',
         methyl_dir = os.path.join(icgc_data_dir, 'qnorm_withinDset_3DS_dropped'),
         mut_fn = os.path.join(icgc_data_dir, "icgc_mut_df.csv.gz"),
@@ -147,8 +149,8 @@ def read_icgc_data() -> tuple:
 
 def read_normal_tcga_data(qnorm_methylation = True) -> tuple:
     print("reading in normal data")
-    dependency_f_dir = "../dependency_files"
-    data_dir = "../data/tcga"
+    dependency_f_dir = os.path.join(THIS_SCRIPT_DIR, "../dependency_files")
+    data_dir = os.path.join(THIS_SCRIPT_DIR, "../data/tcga")
     # read metadata, changing bits to match
     normal_meta_df = pd.read_csv(os.path.join(data_dir, "solid_tissue_normal_meta.tsv"), sep='\t')
     normal_meta_df['sample'] = normal_meta_df['case_submitter_id'].str[:-4]
@@ -203,7 +205,7 @@ def read_normal_tcga_data(qnorm_methylation = True) -> tuple:
     all_methyl_df_t.set_index('index', inplace=True)
     
     # read illum
-    illumina_cpg_locs_df = get_illum_locs(os.path.join(dependency_f_dir, "illumina_cpg_450k_locations.csv"))
+    illumina_cpg_locs_df = get_illum_locs(os.path.join(dependency_f_dir, "illumina_cpg_450k_locations.csv.gz"))
     # merge meta data with transposed methylation
     methyl_age_df_t = all_methyl_df_t.merge(all_meta_df, left_index=True, right_index=True, how='left')
     methyl_age_df_t.dropna(axis=0, inplace=True)
@@ -221,7 +223,7 @@ def read_tcga_data(qnorm_methylation = True) -> tuple:
         methyl_dir = os.path.join(data_dir, 'processed_methylation_noDropNaN'),
     
     illumina_cpg_locs_df, all_mut_df, _, all_methyl_df_t, all_meta_df, _ = main(
-        illum_cpg_locs_fn = os.path.join(dependency_f_dir, "illumina_cpg_450k_locations.csv"),
+        illum_cpg_locs_fn = os.path.join(dependency_f_dir, "illumina_cpg_450k_locations.csv.gz"),
         out_dir = '',
         methyl_dir = methyl_dir,
         mut_fn = os.path.join(data_dir, "PANCAN_mut.tsv.gz"),
