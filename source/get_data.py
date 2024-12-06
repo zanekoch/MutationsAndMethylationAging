@@ -2,7 +2,6 @@ import utils
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-plt.style.use("seaborn-deep")
 import os 
 import glob
 import dask.dataframe as dd
@@ -64,12 +63,17 @@ def get_methylation(methylation_dir, is_icgc = False):
     @ methylation_dir: directory of methylation data, or filename if is_icgc
     @ returns: pandas dataframe of methylation data
     """
-    if is_icgc:
-        methyl_df = pd.read_parquet(methylation_dir)
-    else:
-        methyl_dd = dd.read_parquet(methylation_dir)
-        print("Converting Dask df to pandas df, takes ~10min", flush=True)
-        methyl_df = methyl_dd.compute()
+    try: 
+        if is_icgc:
+            methyl_df = pd.read_parquet(methylation_dir)
+        else:
+            methyl_dd = dd.read_parquet(methylation_dir)
+            print("Converting Dask df to pandas df, takes ~10min", flush=True)
+            methyl_df = methyl_dd.compute()
+    except Exception as e:
+        print("ERROR: methylation data may not be downloaded, follow instructions in ./download_data/download_external.sh to download")
+        print(e)
+        raise e
     return methyl_df
 
 def get_metadata(meta_fn, is_icgc = False):

@@ -20,7 +20,6 @@ matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 from scipy.stats import spearmanr, pearsonr
 
-plt.style.use("seaborn-deep")
 plt.rcParams['svg.fonttype'] = 'none'
 plt.rcParams['pdf.fonttype'] = 42
 plt.rcParams['ps.fonttype'] = 42
@@ -257,13 +256,13 @@ class analyzeComethylation:
         if consortium == 'TCGA':
             # read in mutation data
             all_mut_all_col_df = pd.read_csv(
-                '/cellar/users/zkoch/methylation_and_mutation/data/final_tcga_data/PANCAN_mut.tsv.gz',
+                '../data/tcga/PANCAN_mut.tsv.gz',
                 sep = '\t'
                 )
             all_mut_all_col_df['sample'] = all_mut_all_col_df['sample'].str[:-3]
         elif consortium == 'ICGC':
             all_mut_all_col_df = pd.read_csv(
-                '/cellar/users/zkoch/methylation_and_mutation/data/final_icgc_data/icgc_mut_df.csv.gz',
+                '../data/icgc/icgc_mut_df.csv.gz',
                 sep = '\t'
                 )
         elif consortium == 'TCGA-normal':

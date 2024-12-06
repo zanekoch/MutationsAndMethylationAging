@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-plt.style.use("seaborn-deep")
 #from sklearnex import patch_sklearn
 #patch_sklearn()
 from scipy import stats

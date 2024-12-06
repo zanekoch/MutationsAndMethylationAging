@@ -3,8 +3,8 @@ This repositiory contains code used for the manuscript: Koch et al. 2024: Somati
 
 # Getting started
 1. Clone the repository, e.g., `git clone https://github.com/zanekoch/MutationsAndMethylationAging.git`
-2. Download the data by running `./download_data/download_internal.sh`. Optionally, download raw data from the TCGA and ICGC consortia by running following commands in `./download_data/download_external.sh`.
-3. Create the conda environment by running `conda env create -f ./env/mutationsAndMethylationAging.yml` and activate it by running `conda activate mutationsAndMethylationAging`.
+2. Download the data by running `./download_data/download_internal.sh`. Optionally, download raw data from the TCGA and ICGC consortia by running following commands in `./download_data/download_external.sh` (this is necessary for the replication of some figures, but not others).
+3. Create the conda environment by running `conda env create -f ./env/mutationsAndMethylationAging_noversions.yml` and activate it by running `conda activate mutationsAndMethylationAging`. Note: this environment does not include versions to maximize flexibility across systems, however the specific versions used in the analysis are listed in `mutationsAndMethylationAging_noversions.yml`.
 4. Run the notebooks in the `./notebooks` directory to generate the figures.
 
 # Environment
